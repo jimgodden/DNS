@@ -124,9 +124,9 @@ resource vm_CustomScriptExtension 'Microsoft.Compute/virtualMachines/extensions@
     displayName: 'install software for Linux VM'
   }
   properties: {
-    publisher: 'Microsoft.Compute'
-    type: 'CustomScriptExtension'
-    typeHandlerVersion: '1.9'
+    publisher: 'Microsoft.Azure.Extensions'
+    type: 'CustomScript'
+    typeHandlerVersion: '2.1'
     autoUpgradeMinorVersion: true
     settings: {
       fileUris: [

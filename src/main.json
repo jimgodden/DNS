@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "9495328770085722805"
+      "templateHash": "8404964281565353040"
     }
   },
   "parameters": {
@@ -1422,7 +1422,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "15132366581875854797"
+              "templateHash": "3223008092588182087"
             }
           },
           "parameters": {
@@ -1584,8 +1584,8 @@
                 "displayName": "install software for Linux VM"
               },
               "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
                 "typeHandlerVersion": "1.9",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
@@ -1654,7 +1654,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "15132366581875854797"
+              "templateHash": "3223008092588182087"
             }
           },
           "parameters": {
@@ -1816,8 +1816,8 @@
                 "displayName": "install software for Linux VM"
               },
               "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
                 "typeHandlerVersion": "1.9",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
