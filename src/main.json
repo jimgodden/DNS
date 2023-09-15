@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "8404964281565353040"
+      "templateHash": "7692151385988184600"
     }
   },
   "parameters": {
@@ -1422,7 +1422,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "3223008092588182087"
+              "templateHash": "5097671377874675784"
             }
           },
           "parameters": {
@@ -1586,7 +1586,7 @@
               "properties": {
                 "publisher": "Microsoft.Azure.Extensions",
                 "type": "CustomScript",
-                "typeHandlerVersion": "1.9",
+                "typeHandlerVersion": "2.1",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                   "fileUris": [
@@ -1654,7 +1654,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "3223008092588182087"
+              "templateHash": "5097671377874675784"
             }
           },
           "parameters": {
@@ -1818,7 +1818,7 @@
               "properties": {
                 "publisher": "Microsoft.Azure.Extensions",
                 "type": "CustomScript",
-                "typeHandlerVersion": "1.9",
+                "typeHandlerVersion": "2.1",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                   "fileUris": [
