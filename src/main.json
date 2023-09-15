@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "7692151385988184600"
+      "templateHash": "17865916191810703682"
     }
   },
   "parameters": {
@@ -105,7 +105,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "13842496644558251997"
+              "templateHash": "3516955611599141152"
             }
           },
           "parameters": {
@@ -252,12 +252,6 @@
               "name": "[parameters('vnet_Name')]",
               "location": "[parameters('location')]",
               "properties": {
-                "dhcpOptions": {
-                  "dnsServers": [
-                    "10.1.4.4",
-                    "10.1.4.5"
-                  ]
-                },
                 "addressSpace": {
                   "addressPrefixes": [
                     "[parameters('vnet_AddressPrefix')]"
@@ -444,7 +438,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "13842496644558251997"
+              "templateHash": "3516955611599141152"
             }
           },
           "parameters": {
@@ -591,12 +585,6 @@
               "name": "[parameters('vnet_Name')]",
               "location": "[parameters('location')]",
               "properties": {
-                "dhcpOptions": {
-                  "dnsServers": [
-                    "10.1.4.4",
-                    "10.1.4.5"
-                  ]
-                },
                 "addressSpace": {
                   "addressPrefixes": [
                     "[parameters('vnet_AddressPrefix')]"
