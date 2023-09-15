@@ -62,6 +62,12 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-09-01' = {
   name: vnet_Name
   location: location
   properties: {
+    dhcpOptions: {
+      dnsServers: [
+        '10.1.4.4'
+        '10.1.4.5'
+      ]
+    }
     addressSpace: {
       addressPrefixes: [
         vnet_AddressPrefix

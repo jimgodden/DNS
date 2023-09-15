@@ -21,6 +21,8 @@ param accelNet bool
 
 param subnetID string
 
+param vm_ScriptFileUri string = 'https://mainjamesgstorage.blob.core.windows.net/scripts/bind9install.sh'
+
 resource nic 'Microsoft.Network/networkInterfaces@2022-09-01' = {
   name: nic_Name
   location: location
@@ -111,5 +113,28 @@ resource vm_NetworkWatcherExtension 'Microsoft.Compute/virtualMachines/extension
     publisher: 'Microsoft.Azure.NetworkWatcher'
     type: 'NetworkWatcherAgentLinux'
     typeHandlerVersion: '1.4'
+  }
+}
+
+resource vm_CustomScriptExtension 'Microsoft.Compute/virtualMachines/extensions@2021-11-01' = {
+  parent: linuxVM
+  name: 'installcustomscript'
+  location: location
+  tags: {
+    displayName: 'install software for Linux VM'
+  }
+  properties: {
+    publisher: 'Microsoft.Compute'
+    type: 'CustomScriptExtension'
+    typeHandlerVersion: '1.9'
+    autoUpgradeMinorVersion: true
+    settings: {
+      fileUris: [
+        vm_ScriptFileUri
+      ]
+    }
+    protectedSettings: {
+      commandToExecute: 'sh bind9install.sh'
+    }
   }
 }

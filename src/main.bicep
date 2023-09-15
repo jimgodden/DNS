@@ -17,20 +17,11 @@ I'd recommend Standard_D2s_v3 for a cheap VM that supports Accel Net.
 ''')
 param accelNet bool = false
 
-@description('If true, Virtual Networks will be connected via Virtual Network Gateway S2S connection.  If false, Virtual Network Peering will be used instead.')
-param isUsingVPN bool = true
-
-@description('If true, a Windows VM will be deployed in both source and destination')
-param isUsingWindows bool = true
-
 @description('Amount of Windows Virtual Machines to deploy in the source side.  This number is irrelevant if not deploying Windows Virtual Machines')
 param amountOfSourceSideWindowsVMs int = 1
 
 @description('Amount of Windows Virtual Machines to deploy in the destination side.  This number is irrelevant if not deploying Windows Virtual Machines')
 param amountOfDestinationSideWindowsVMs int = 1
-
-@description('If true, a Linux VM will be deployed in both source and destination')
-param isUsingLinux bool = true
 
 @description('Amount of Linux Virtual Machines to deploy in the source side.  This number is irrelevant if not deploying Linux Virtual Machines')
 param amountOfSourceSideLinuxVMs  int = 1
@@ -62,7 +53,7 @@ module destinationVNET './Modules/VirtualNetwork.bicep' = {
 }
 
 // Virtual Network Peerings
-module sourceVNETPeering './Modules/VirtualNetworkPeering.bicep' = if (!isUsingVPN) {
+module sourceVNETPeering './Modules/VirtualNetworkPeering.bicep' = {
   name: 'srctodstPeering'
   params: {
     dstVNET_Name: destinationVNET.outputs.vnetName
@@ -73,7 +64,7 @@ module sourceVNETPeering './Modules/VirtualNetworkPeering.bicep' = if (!isUsingV
   ]
 }
 
-module destinationVNETPeering './Modules/VirtualNetworkPeering.bicep' = if (!isUsingVPN) {
+module destinationVNETPeering './Modules/VirtualNetworkPeering.bicep' = {
   name: 'dsttosrcPeering'
   params: {
     dstVNET_Name: sourceVNET.outputs.vnetName
@@ -85,7 +76,7 @@ module destinationVNETPeering './Modules/VirtualNetworkPeering.bicep' = if (!isU
 }
 
 // Windows Virtual Machines
-module sourceVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, amountOfSourceSideWindowsVMs):  if (isUsingWindows) {
+module sourceVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, amountOfSourceSideWindowsVMs):  {
   name: 'srcVMWindows${i}'
   params: {
     accelNet: accelNet
@@ -99,7 +90,7 @@ module sourceVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, amount
   }
 } ]
 
-module destinationVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, amountOfDestinationSideWindowsVMs):  if (isUsingWindows) {
+module destinationVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, amountOfDestinationSideWindowsVMs):  {
   name: 'dstVMWindows${i}'
   params: {
     accelNet: accelNet
@@ -114,7 +105,7 @@ module destinationVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, a
 } ]
 
 // Linux Virtual Machines
-module sourceVM_Linx 'Modules/LinuxNetTestVM.bicep' = [ for i in range(1, amountOfSourceSideLinuxVMs):  if (isUsingLinux) {
+module sourceVM_Linx 'Modules/LinuxNetTestVM.bicep' = [ for i in range(1, amountOfSourceSideLinuxVMs):  {
   name: 'srcVMLinux${i}'
   params: {
     accelNet: accelNet
@@ -128,7 +119,7 @@ module sourceVM_Linx 'Modules/LinuxNetTestVM.bicep' = [ for i in range(1, amount
   }
 } ]
 
-module destinationVMLinx 'Modules/LinuxNetTestVM.bicep' = [ for i in range(1, amountOfDestinationSideLinuxVMs):  if (isUsingLinux) {
+module destinationVMLinx 'Modules/LinuxNetTestVM.bicep' = [ for i in range(1, amountOfDestinationSideLinuxVMs):  {
   name: 'dstVMLinux${i}'
   params: {
     accelNet: accelNet

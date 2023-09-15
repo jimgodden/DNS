@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "12607358537171068569"
+      "templateHash": "9495328770085722805"
     }
   },
   "parameters": {
@@ -42,20 +42,6 @@
         "description": "True enables Accelerated Networking and False disabled it.  \r\nNot all VM sizes support Accel Net (i.e. Standard_B2ms).  \r\nI'd recommend Standard_D2s_v3 for a cheap VM that supports Accel Net.\r\n"
       }
     },
-    "isUsingVPN": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "description": "If true, Virtual Networks will be connected via Virtual Network Gateway S2S connection.  If false, Virtual Network Peering will be used instead."
-      }
-    },
-    "isUsingWindows": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "description": "If true, a Windows VM will be deployed in both source and destination"
-      }
-    },
     "amountOfSourceSideWindowsVMs": {
       "type": "int",
       "defaultValue": 1,
@@ -68,13 +54,6 @@
       "defaultValue": 1,
       "metadata": {
         "description": "Amount of Windows Virtual Machines to deploy in the destination side.  This number is irrelevant if not deploying Windows Virtual Machines"
-      }
-    },
-    "isUsingLinux": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "description": "If true, a Linux VM will be deployed in both source and destination"
       }
     },
     "amountOfSourceSideLinuxVMs": {
@@ -126,7 +105,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "3516955611599141152"
+              "templateHash": "13842496644558251997"
             }
           },
           "parameters": {
@@ -273,6 +252,12 @@
               "name": "[parameters('vnet_Name')]",
               "location": "[parameters('location')]",
               "properties": {
+                "dhcpOptions": {
+                  "dnsServers": [
+                    "10.1.4.4",
+                    "10.1.4.5"
+                  ]
+                },
                 "addressSpace": {
                   "addressPrefixes": [
                     "[parameters('vnet_AddressPrefix')]"
@@ -459,7 +444,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "3516955611599141152"
+              "templateHash": "13842496644558251997"
             }
           },
           "parameters": {
@@ -606,6 +591,12 @@
               "name": "[parameters('vnet_Name')]",
               "location": "[parameters('location')]",
               "properties": {
+                "dhcpOptions": {
+                  "dnsServers": [
+                    "10.1.4.4",
+                    "10.1.4.5"
+                  ]
+                },
                 "addressSpace": {
                   "addressPrefixes": [
                     "[parameters('vnet_AddressPrefix')]"
@@ -760,7 +751,6 @@
       }
     },
     {
-      "condition": "[not(parameters('isUsingVPN'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "srctodstPeering",
@@ -822,7 +812,6 @@
       ]
     },
     {
-      "condition": "[not(parameters('isUsingVPN'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "dsttosrcPeering",
@@ -888,7 +877,6 @@
         "name": "sourceVM_Windows",
         "count": "[length(range(1, parameters('amountOfSourceSideWindowsVMs')))]"
       },
-      "condition": "[parameters('isUsingWindows')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('srcVMWindows{0}', range(1, parameters('amountOfSourceSideWindowsVMs'))[copyIndex()])]",
@@ -1141,7 +1129,6 @@
         "name": "destinationVM_Windows",
         "count": "[length(range(1, parameters('amountOfDestinationSideWindowsVMs')))]"
       },
-      "condition": "[parameters('isUsingWindows')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('dstVMWindows{0}', range(1, parameters('amountOfDestinationSideWindowsVMs'))[copyIndex()])]",
@@ -1394,7 +1381,6 @@
         "name": "sourceVM_Linx",
         "count": "[length(range(1, parameters('amountOfSourceSideLinuxVMs')))]"
       },
-      "condition": "[parameters('isUsingLinux')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('srcVMLinux{0}', range(1, parameters('amountOfSourceSideLinuxVMs'))[copyIndex()])]",
@@ -1436,7 +1422,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "950508837785297545"
+              "templateHash": "15132366581875854797"
             }
           },
           "parameters": {
@@ -1481,6 +1467,10 @@
             },
             "subnetID": {
               "type": "string"
+            },
+            "vm_ScriptFileUri": {
+              "type": "string",
+              "defaultValue": "https://mainjamesgstorage.blob.core.windows.net/scripts/bind9install.sh"
             }
           },
           "resources": [
@@ -1584,6 +1574,32 @@
               "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
               ]
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines/extensions",
+              "apiVersion": "2021-11-01",
+              "name": "[format('{0}/{1}', parameters('vm_Name'), 'installcustomscript')]",
+              "location": "[parameters('location')]",
+              "tags": {
+                "displayName": "install software for Linux VM"
+              },
+              "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.9",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                  "fileUris": [
+                    "[parameters('vm_ScriptFileUri')]"
+                  ]
+                },
+                "protectedSettings": {
+                  "commandToExecute": "sh bind9install.sh"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
+              ]
             }
           ]
         }
@@ -1597,7 +1613,6 @@
         "name": "destinationVMLinx",
         "count": "[length(range(1, parameters('amountOfDestinationSideLinuxVMs')))]"
       },
-      "condition": "[parameters('isUsingLinux')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('dstVMLinux{0}', range(1, parameters('amountOfDestinationSideLinuxVMs'))[copyIndex()])]",
@@ -1639,7 +1654,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "950508837785297545"
+              "templateHash": "15132366581875854797"
             }
           },
           "parameters": {
@@ -1684,6 +1699,10 @@
             },
             "subnetID": {
               "type": "string"
+            },
+            "vm_ScriptFileUri": {
+              "type": "string",
+              "defaultValue": "https://mainjamesgstorage.blob.core.windows.net/scripts/bind9install.sh"
             }
           },
           "resources": [
@@ -1783,6 +1802,32 @@
                 "publisher": "Microsoft.Azure.NetworkWatcher",
                 "type": "NetworkWatcherAgentLinux",
                 "typeHandlerVersion": "1.4"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines/extensions",
+              "apiVersion": "2021-11-01",
+              "name": "[format('{0}/{1}', parameters('vm_Name'), 'installcustomscript')]",
+              "location": "[parameters('location')]",
+              "tags": {
+                "displayName": "install software for Linux VM"
+              },
+              "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.9",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                  "fileUris": [
+                    "[parameters('vm_ScriptFileUri')]"
+                  ]
+                },
+                "protectedSettings": {
+                  "commandToExecute": "sh bind9install.sh"
+                }
               },
               "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
