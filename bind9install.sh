@@ -20,10 +20,10 @@ options {
 EOF
 
 # Configure DNS resolver to use the local BIND9 server
-sudo echo "nameserver 127.0.0.1" > /etc/resolv.conf
+# sudo echo "nameserver 127.0.0.1" > /etc/resolv.conf
 
 # Restart BIND9 to apply changes
 sudo systemctl restart bind9
 
 # Enable and start the BIND9 service on boot
-sudo systemctl enable bind9
+# sudo systemctl enable bind9

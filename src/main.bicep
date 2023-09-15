@@ -9,13 +9,13 @@ param vm_adminUsername string
 param vm_adminPassword string
 
 @description('Size of the Virtual Machines')
-param vmSize string = 'Standard_B2ms' // 'Standard_D2s_v3' // 'Standard_D16lds_v5'
+param vmSize string = 'Standard_E4as_v4' // 'Standard_D2s_v3' // 'Standard_D16lds_v5'
 
 @description('''True enables Accelerated Networking and False disabled it.  
 Not all VM sizes support Accel Net (i.e. Standard_B2ms).  
 I'd recommend Standard_D2s_v3 for a cheap VM that supports Accel Net.
 ''')
-param accelNet bool = false
+param accelNet bool = true
 
 @description('Amount of Windows Virtual Machines to deploy in the source side.  This number is irrelevant if not deploying Windows Virtual Machines')
 param amountOfSourceSideWindowsVMs int = 1
@@ -24,7 +24,7 @@ param amountOfSourceSideWindowsVMs int = 1
 param amountOfDestinationSideWindowsVMs int = 1
 
 @description('Amount of Linux Virtual Machines to deploy in the source side.  This number is irrelevant if not deploying Linux Virtual Machines')
-param amountOfSourceSideLinuxVMs  int = 1
+param amountOfSourceSideLinuxVMs  int = 0
 
 @description('Amount of Linux Virtual Machines to deploy in the destination side.  This number is irrelevant if not deploying Linux Virtual Machines')
 param amountOfDestinationSideLinuxVMs  int = 1
@@ -81,11 +81,11 @@ module sourceVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, amount
   params: {
     accelNet: accelNet
     location: location
-    nic_Name: 'srcVM-Windows_NIC${i}'
+    nic_Name: 'WindowsClient_NIC${i}'
     subnetID: sourceVNET.outputs.generalSubnetID
     vm_AdminPassword: vm_adminPassword
     vm_AdminUserName: vm_adminUsername
-    vm_Name: 'srcVM-Windows${i}'
+    vm_Name: 'WindowsClient${i}'
     vmSize: vmSize
   }
 } ]
@@ -95,11 +95,11 @@ module destinationVM_Windows './Modules/NetTestVM.bicep' = [ for i in range(1, a
   params: {
     accelNet: accelNet
     location: location
-    nic_Name: 'dstVM-Windows_NIC${i}'
+    nic_Name: 'WindowsServer_NIC${i}'
     subnetID: destinationVNET.outputs.generalSubnetID
     vm_AdminPassword: vm_adminPassword
     vm_AdminUserName: vm_adminUsername
-    vm_Name: 'dstVM-Windows${i}'
+    vm_Name: 'WindowsServer${i}'
     vmSize: vmSize
   }
 } ]
@@ -110,11 +110,11 @@ module sourceVM_Linx 'Modules/LinuxNetTestVM.bicep' = [ for i in range(1, amount
   params: {
     accelNet: accelNet
     location: location
-    nic_Name: 'srcVM-Linux_NIC${i}'
+    nic_Name: 'LinuxClient_NIC${i}'
     subnetID: sourceVNET.outputs.generalSubnetID
     vm_AdminPassword: vm_adminPassword
     vm_AdminUserName: vm_adminUsername
-    vm_Name: 'srcVM-Linux${i}'
+    vm_Name: 'LinuxClient${i}'
     vmSize: vmSize
   }
 } ]
@@ -124,11 +124,11 @@ module destinationVMLinx 'Modules/LinuxNetTestVM.bicep' = [ for i in range(1, am
   params: {
     accelNet: accelNet
     location: location
-    nic_Name: 'dstVM-Linux_NIC${i}'
+    nic_Name: 'LinuxServer_NIC${i}'
     subnetID: destinationVNET.outputs.generalSubnetID
     vm_AdminPassword: vm_adminPassword
     vm_AdminUserName: vm_adminUsername
-    vm_Name: 'dstVM-Linux${i}'
+    vm_Name: 'LinuxServer${i}'
     vmSize: vmSize
   }
 } ]
