@@ -64,12 +64,18 @@ resource vm 'Microsoft.Compute/virtualMachines@2022-11-01' = {
       vmSize: vmSize
     }
     storageProfile: {
+      // imageReference: {
+      //   publisher: 'MicrosoftWindowsServer'
+      //   offer: 'WindowsServer'
+      //   sku: '2022-datacenter-azure-edition'
+      //   version: 'latest'
+      // }
       imageReference: {
         publisher: 'MicrosoftWindowsServer'
         offer: 'WindowsServer'
-        sku: '2022-datacenter-azure-edition'
+        sku: '2019-datacenter-core-g2'
         version: 'latest'
-      }
+    }
       osDisk: {
         osType: 'Windows'
         name: '${vm_Name}_OsDisk_1'

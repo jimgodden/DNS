@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "9754080290668059590"
+      "templateHash": "18242825671404627835"
     }
   },
   "parameters": {
@@ -906,7 +906,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "17656567703793400280"
+              "templateHash": "1297477079933334734"
             }
           },
           "parameters": {
@@ -1000,7 +1000,7 @@
                   "imageReference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2022-datacenter-azure-edition",
+                    "sku": "2019-datacenter-core-g2",
                     "version": "latest"
                   },
                   "osDisk": {
@@ -1158,7 +1158,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "17656567703793400280"
+              "templateHash": "1297477079933334734"
             }
           },
           "parameters": {
@@ -1252,7 +1252,7 @@
                   "imageReference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2022-datacenter-azure-edition",
+                    "sku": "2019-datacenter-core-g2",
                     "version": "latest"
                   },
                   "osDisk": {
