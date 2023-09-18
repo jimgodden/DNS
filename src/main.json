@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "18242825671404627835"
+      "templateHash": "354104116576316706"
     }
   },
   "parameters": {
@@ -906,7 +906,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "1297477079933334734"
+              "templateHash": "3083290855545299470"
             }
           },
           "parameters": {
@@ -1000,7 +1000,7 @@
                   "imageReference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2019-datacenter-core-g2",
+                    "sku": "2019-datacenter-gensecond",
                     "version": "latest"
                   },
                   "osDisk": {
@@ -1064,32 +1064,6 @@
                 "publisher": "Microsoft.Azure.NetworkWatcher",
                 "type": "NetworkWatcherAgentWindows",
                 "typeHandlerVersion": "1.4"
-              },
-              "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
-              ]
-            },
-            {
-              "type": "Microsoft.Compute/virtualMachines/extensions",
-              "apiVersion": "2021-11-01",
-              "name": "[format('{0}/{1}', parameters('vm_Name'), 'installcustomscript')]",
-              "location": "[parameters('location')]",
-              "tags": {
-                "displayName": "install software for Windows VM"
-              },
-              "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.9",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                  "fileUris": [
-                    "[parameters('vm_ScriptFileUri')]"
-                  ]
-                },
-                "protectedSettings": {
-                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File InitScript.ps1"
-                }
               },
               "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
@@ -1158,7 +1132,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "1297477079933334734"
+              "templateHash": "3083290855545299470"
             }
           },
           "parameters": {
@@ -1252,7 +1226,7 @@
                   "imageReference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2019-datacenter-core-g2",
+                    "sku": "2019-datacenter-gensecond",
                     "version": "latest"
                   },
                   "osDisk": {
@@ -1316,32 +1290,6 @@
                 "publisher": "Microsoft.Azure.NetworkWatcher",
                 "type": "NetworkWatcherAgentWindows",
                 "typeHandlerVersion": "1.4"
-              },
-              "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
-              ]
-            },
-            {
-              "type": "Microsoft.Compute/virtualMachines/extensions",
-              "apiVersion": "2021-11-01",
-              "name": "[format('{0}/{1}', parameters('vm_Name'), 'installcustomscript')]",
-              "location": "[parameters('location')]",
-              "tags": {
-                "displayName": "install software for Windows VM"
-              },
-              "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.9",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                  "fileUris": [
-                    "[parameters('vm_ScriptFileUri')]"
-                  ]
-                },
-                "protectedSettings": {
-                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File InitScript.ps1"
-                }
               },
               "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm_Name'))]"
