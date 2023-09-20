@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "354104116576316706"
+      "templateHash": "16309741464812372400"
     }
   },
   "parameters": {
@@ -65,7 +65,7 @@
     },
     "amountOfDestinationSideLinuxVMs": {
       "type": "int",
-      "defaultValue": 1,
+      "defaultValue": 0,
       "metadata": {
         "description": "Amount of Linux Virtual Machines to deploy in the destination side.  This number is irrelevant if not deploying Linux Virtual Machines"
       }
@@ -906,7 +906,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "3083290855545299470"
+              "templateHash": "13146893585955808698"
             }
           },
           "parameters": {
@@ -1000,7 +1000,7 @@
                   "imageReference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2019-datacenter-gensecond",
+                    "sku": "2022-datacenter-azure-edition",
                     "version": "latest"
                   },
                   "osDisk": {
@@ -1132,7 +1132,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "3083290855545299470"
+              "templateHash": "13146893585955808698"
             }
           },
           "parameters": {
@@ -1226,7 +1226,7 @@
                   "imageReference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2019-datacenter-gensecond",
+                    "sku": "2022-datacenter-azure-edition",
                     "version": "latest"
                   },
                   "osDisk": {

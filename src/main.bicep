@@ -27,7 +27,7 @@ param amountOfDestinationSideWindowsVMs int = 1
 param amountOfSourceSideLinuxVMs  int = 0
 
 @description('Amount of Linux Virtual Machines to deploy in the destination side.  This number is irrelevant if not deploying Linux Virtual Machines')
-param amountOfDestinationSideLinuxVMs  int = 1
+param amountOfDestinationSideLinuxVMs  int = 0
 
 // Virtual Networks
 module sourceVNET './Modules/VirtualNetwork.bicep' = {
