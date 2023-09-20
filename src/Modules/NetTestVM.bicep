@@ -137,28 +137,28 @@ resource vm_NetworkWatcherExtension 'Microsoft.Compute/virtualMachines/extension
   }
 }
 
-// resource vm_CustomScriptExtension 'Microsoft.Compute/virtualMachines/extensions@2021-11-01' = {
-//   parent: vm
-//   name: 'installcustomscript'
-//   location: location
-//   tags: {
-//     displayName: 'install software for Windows VM'
-//   }
-//   properties: {
-//     publisher: 'Microsoft.Compute'
-//     type: 'CustomScriptExtension'
-//     typeHandlerVersion: '1.9'
-//     autoUpgradeMinorVersion: true
-//     settings: {
-//       fileUris: [
-//         vm_ScriptFileUri
-//       ]
-//     }
-//     protectedSettings: {
-//       commandToExecute: 'powershell -ExecutionPolicy Unrestricted -File InitScript.ps1'
-//     }
-//   }
-// }
+resource vm_CustomScriptExtension 'Microsoft.Compute/virtualMachines/extensions@2021-11-01' = {
+  parent: vm
+  name: 'installcustomscript'
+  location: location
+  tags: {
+    displayName: 'install software for Windows VM'
+  }
+  properties: {
+    publisher: 'Microsoft.Compute'
+    type: 'CustomScriptExtension'
+    typeHandlerVersion: '1.9'
+    autoUpgradeMinorVersion: true
+    settings: {
+      fileUris: [
+        vm_ScriptFileUri
+      ]
+    }
+    protectedSettings: {
+      commandToExecute: 'powershell -ExecutionPolicy Unrestricted -File InitScript.ps1'
+    }
+  }
+}
 
 
 output nicName string = nic.name
