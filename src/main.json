@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "16001867858817906369"
+      "templateHash": "14371327205635904009"
     }
   },
   "parameters": {
@@ -906,7 +906,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "17656567703793400280"
+              "templateHash": "16591584185043939507"
             }
           },
           "parameters": {
@@ -954,7 +954,7 @@
             },
             "vm_ScriptFileUri": {
               "type": "string",
-              "defaultValue": "https://mainjamesgstorage.blob.core.windows.net/scripts/InitScript.ps1"
+              "defaultValue": "https://mainjamesgstorage.blob.core.windows.net/scripts/dnsInitScript.ps1"
             }
           },
           "resources": [
@@ -1158,7 +1158,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "17656567703793400280"
+              "templateHash": "16591584185043939507"
             }
           },
           "parameters": {
@@ -1206,7 +1206,7 @@
             },
             "vm_ScriptFileUri": {
               "type": "string",
-              "defaultValue": "https://mainjamesgstorage.blob.core.windows.net/scripts/InitScript.ps1"
+              "defaultValue": "https://mainjamesgstorage.blob.core.windows.net/scripts/dnsInitScript.ps1"
             }
           },
           "resources": [
