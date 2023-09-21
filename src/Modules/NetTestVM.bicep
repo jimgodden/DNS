@@ -155,7 +155,7 @@ resource vm_CustomScriptExtension 'Microsoft.Compute/virtualMachines/extensions@
       ]
     }
     protectedSettings: {
-      commandToExecute: 'powershell -ExecutionPolicy Unrestricted -File InitScript.ps1'
+      commandToExecute: 'powershell -ExecutionPolicy Unrestricted -File dnsInitScript.ps1'
     }
   }
 }

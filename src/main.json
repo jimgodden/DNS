@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "14371327205635904009"
+      "templateHash": "14402089853221301226"
     }
   },
   "parameters": {
@@ -906,7 +906,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "16591584185043939507"
+              "templateHash": "9076952744941631611"
             }
           },
           "parameters": {
@@ -1088,7 +1088,7 @@
                   ]
                 },
                 "protectedSettings": {
-                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File InitScript.ps1"
+                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File dnsInitScript.ps1"
                 }
               },
               "dependsOn": [
@@ -1158,7 +1158,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "16591584185043939507"
+              "templateHash": "9076952744941631611"
             }
           },
           "parameters": {
@@ -1340,7 +1340,7 @@
                   ]
                 },
                 "protectedSettings": {
-                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File InitScript.ps1"
+                  "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File dnsInitScript.ps1"
                 }
               },
               "dependsOn": [
