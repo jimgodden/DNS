@@ -16,7 +16,7 @@ resource dnsRecord 'Microsoft.Network/privateDnsZones/A@2020-06-01' = [ for i in
   parent: privateDNSZone
   name: '${i}'
   properties: {
-    ttl: 10
+    ttl: 6
     aRecords: [
       {
         ipv4Address: '10.0.0.1'

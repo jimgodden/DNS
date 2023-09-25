@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.18.4.5664",
-      "templateHash": "14402089853221301226"
+      "templateHash": "4715987450460770887"
     }
   },
   "parameters": {
@@ -1962,7 +1962,7 @@
         "mode": "Incremental",
         "parameters": {
           "amountOfRecords": {
-            "value": 20
+            "value": 100
           },
           "privateDNSZoneLinkedVnetIDList": {
             "value": [
@@ -1982,7 +1982,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.18.4.5664",
-              "templateHash": "5390500049926075850"
+              "templateHash": "13937786433674323432"
             }
           },
           "parameters": {
@@ -2016,7 +2016,7 @@
               "apiVersion": "2020-06-01",
               "name": "[format('{0}/{1}', parameters('privateDNSZone_Name'), format('{0}', range(1, parameters('amountOfRecords'))[copyIndex()]))]",
               "properties": {
-                "ttl": 10,
+                "ttl": 6,
                 "aRecords": [
                   {
                     "ipv4Address": "10.0.0.1"

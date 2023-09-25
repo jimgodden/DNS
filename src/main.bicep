@@ -145,7 +145,7 @@ module sourceBastion './Modules/Bastion.bicep' = {
 module pdz 'Modules/PrivateDNSZone.bicep' = {
   name: 'pdz'
   params: {
-    amountOfRecords: 20
+    amountOfRecords: 100
     privateDNSZoneLinkedVnetIDList: [destinationVNET.outputs.vnetID]
     privateDNSZoneLinkedVnetNamesList: [destinationVNET.outputs.vnetName]
   }
